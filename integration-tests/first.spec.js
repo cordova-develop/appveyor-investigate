@@ -57,6 +57,7 @@ describe('first tests', function () {
                     var cp = child_process.spawn(path_npm, ['install', modpath]);
                     cp.on('exit', function (code) {
                         expect(1).toBe(1);
+                        console.log('---- step 0 -----');
                         resolve();
                     });
                     cp.stdout.setEncoding('utf-8');
@@ -65,7 +66,9 @@ describe('first tests', function () {
                     });
                 });
             }).then(function () {
+                console.log('---- step 1 ----');
                 return new Promise(function (resolve, reject) {
+                    console.log('---- step 2 ----');
                     var cp = null;
                     if (iswin32) {
                         cp = child_process.spawn('dir', ['']);
