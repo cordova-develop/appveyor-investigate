@@ -68,6 +68,7 @@ describe('first tests', function () {
                 });
             }).then(function () {
                 return new Promise(function (resolve, reject) {
+                    process.chdir(path.resolve(testProject, 'node_modules'));
                     var cp = null;
                     if (iswin32) {
                         cp = child_process.spawn('cmd', ['/c', 'dir']);
