@@ -1,3 +1,5 @@
+var child_process = require('child_process');
+var which = require('which');
 var helpers = require('./helpers');
 
 const TIMEOUT = 60 * 1000;
@@ -22,7 +24,19 @@ describe('first tests', function () {
     it('Test 002 : npm install from local directory', function () {
         return Promise.resolve()
             .then(function () {
-                expect(1).toBe(1);
+                return new Promise(function (resolve, reject) {
+                    var path_npm = which.sync('npm');
+                    console.log(path_npm);
+                    var cp = child_process.spawn(path_npm, ['-v']);
+                    cp.on('exit', function (code) {
+                        expect(1).toBe(1);
+                        resolve();
+                    });
+                    cp.stdout.setEncoding('utf-8');
+                    cp.stdout.on('data', function (data) {
+                        console.log(data);
+                    });
+                });
             });
     });
 });

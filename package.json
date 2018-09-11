@@ -15,7 +15,8 @@
   },
   "homepage": "https://github.com/cordova-develop/appveyor-investigate#readme",
   "devDependencies": {
-    "jasmine": "^3.1.0"
+    "jasmine": "^3.1.0",
+    "which": "^1.3.1"
   },
   "scripts": {
     "test": "npm run e2e-tests",
