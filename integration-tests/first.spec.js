@@ -50,6 +50,7 @@ describe('first tests', function () {
     it('Test 003 : npm install from local directory', function () {
         return Promise.resolve()
             .then(function () {
+                console.log('is win32 : ' + iswin32);
                 return new Promise(function (resolve, reject) {
                     var modpath = path.resolve(__dirname, 'fixtures', 'modules', 'test01');
                     console.log("modpath:" + modpath);
@@ -82,6 +83,10 @@ describe('first tests', function () {
                     cp.stdout.setEncoding('utf-8');
                     cp.stdout.on('data', function (data) {
                         console.log('----- result of ls/dir ------');
+                        console.log(data);
+                    });
+                    cp.stderr.setEncoding('utf-8');
+                    cp.stderr.on('data', function (data) {
                         console.log(data);
                     });
                 });
