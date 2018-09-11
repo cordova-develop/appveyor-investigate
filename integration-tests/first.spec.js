@@ -89,7 +89,7 @@ describe('first tests', function () {
                         console.log('---- ls/dir errors ----');
                         console.log(data);
                     });
-                 
+
                 });
             });
     });
@@ -123,9 +123,13 @@ describe('first tests', function () {
     });
 
     it('Test 005 : statSync', function () {
-        var dest = path.resolve(testProject, 'Test01');
-        var stat = fs.statSync(dest);
-        console.log(stat);
-        expect(1).toBe(1);
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () { resolve(); }, 100);
+        }).then(function () {
+            var dest = path.resolve(testProject, 'Test01');
+            var stat = fs.statSync(dest);
+            console.log(stat);
+            expect(1).toBe(1);
+        });
     })
 });
