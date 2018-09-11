@@ -67,10 +67,29 @@ describe('first tests', function () {
                     });
                 });
             }).then(function () {
-                shelljs.ls('-l').forEach(function (file) {
-                    console.log(file);
+                return new Promise(function (resolve, reject) {
+                    var cp = null;
+                    if (iswin32) {
+                        cp = child_process.spawn('cmd', ['/c', 'dir']);
+                    } else {
+                        cp = child_process.spawn('ls', ['-l']);
+                    }
+                    cp.on('exit', function (code) {
+                        expect(1).toBe(1);
+                        resolve();
+                    });
+                    cp.stdout.setEncoding('utf-8');
+                    cp.stdout.on('data', function (data) {
+                        console.log('---- ls/dir results ----');
+                        console.log(data);
+                    });
+                    cp.stderr.setEncoding('utf-8');
+                    cp.stderr.on('data', function (data) {
+                        console.log('---- ls/dir errors ----');
+                        console.log(data);
+                    });
+                 
                 });
-                expect(1).toBe(1);
             });
     });
 });
