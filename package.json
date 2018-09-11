@@ -1,0 +1,27 @@
+{
+  "name": "appveyor-investigate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cordova-develop/appveyor-investigate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cordova-develop/appveyor-investigate/issues"
+  },
+  "homepage": "https://github.com/cordova-develop/appveyor-investigate#readme",
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  },
+  "scripts": {
+    "test": "npm run e2e-tests",
+    "e2e-tests": "jasmine JASMINE_CONFIG_PATH=integration-tests/jasmine.json"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.0"
+  }
+}
