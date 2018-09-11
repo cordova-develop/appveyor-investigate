@@ -4,6 +4,7 @@ var helpers = require('./helpers');
 var path = require('path');
 var fs = require('fs-extra');
 var iswin32 = process.platform === 'win32';
+var shelljs = require('shelljs');
 
 const TIMEOUT = 60 * 1000;
 
@@ -58,7 +59,6 @@ describe('first tests', function () {
                     var cp = child_process.spawn(path_npm, ['install', modpath]);
                     cp.on('exit', function (code) {
                         expect(1).toBe(1);
-                        console.log('---- step 0 -----');
                         resolve();
                     });
                     cp.stdout.setEncoding('utf-8');
@@ -67,30 +67,10 @@ describe('first tests', function () {
                     });
                 });
             }).then(function () {
-                console.log('---- step 1 ----');
-                return new Promise(function (resolve, reject) {
-                    console.log('---- step 2 ----');
-                    var cp = null;
-                    if (iswin32) {
-                        var path_dir = which.sync('dir');
-                        cp = child_process.spawn(path_dir, ['']);
-                    } else {
-                        cp = child_process.spawn('ls', ['-alh']);
-                    }
-                    cp.on('exit', function (code) {
-                        expect(1).toBe(1);
-                        resolve();
-                    });
-                    cp.stdout.setEncoding('utf-8');
-                    cp.stdout.on('data', function (data) {
-                        console.log('----- result of ls/dir ------');
-                        console.log(data);
-                    });
-                    cp.stderr.setEncoding('utf-8');
-                    cp.stderr.on('data', function (data) {
-                        console.log(data);
-                    });
+                shelljs.ls('-l').forEach(function (file) {
+                    console.log(file);
                 });
+                expect(1).toBe(1);
             });
     });
 });
