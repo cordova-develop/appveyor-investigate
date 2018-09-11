@@ -72,7 +72,8 @@ describe('first tests', function () {
                     console.log('---- step 2 ----');
                     var cp = null;
                     if (iswin32) {
-                        cp = child_process.spawn('dir', ['']);
+                        var path_dir = which.sync('dir');
+                        cp = child_process.spawn(path_dir, ['']);
                     } else {
                         cp = child_process.spawn('ls', ['-alh']);
                     }
