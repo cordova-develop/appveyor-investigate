@@ -78,6 +78,7 @@ describe('first tests', function () {
                     });
                     cp.stdout.setEncoding('utf-8');
                     cp.stdout.on('data', function (data) {
+                        console.log('----- result of ls/dir ------');
                         console.log(data);
                     });
                 });
