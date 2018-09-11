@@ -81,7 +81,7 @@ describe('first tests', function () {
                     });
                     cp.stdout.setEncoding('utf-8');
                     cp.stdout.on('data', function (data) {
-                        console.log('---- ls/dir results ----');
+                        console.log('---- ls/dir results : ' + path.resolve(testProject, 'node_modules') + ' ----');
                         console.log(data);
                     });
                     cp.stderr.setEncoding('utf-8');
@@ -111,7 +111,7 @@ describe('first tests', function () {
             });
             cp.stdout.setEncoding('utf-8');
             cp.stdout.on('data', function (data) {
-                console.log('---- ls/dir results ----');
+                console.log('---- ls/dir results : ' + testProject + '  ----');
                 console.log(data);
             });
             cp.stderr.setEncoding('utf-8');
@@ -121,4 +121,11 @@ describe('first tests', function () {
             });
         });
     });
+
+    it('Test 005 : statSync', function () {
+        var dest = path.resolve(testProject, 'Test01');
+        var stat = fs.statSync(dest);
+        console.log(stat);
+        expect(1).toBe(1);
+    })
 });
