@@ -68,7 +68,7 @@ describe('first tests', function () {
                 return new Promise(function (resolve, reject) {
                     var cp = null;
                     if (iswin32) {
-                        cp = child_process.spawn('dir', ['/d']);
+                        cp = child_process.spawn('dir', ['']);
                     } else {
                         cp = child_process.spawn('ls', ['-alh']);
                     }
