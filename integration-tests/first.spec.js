@@ -5,10 +5,16 @@ var path = require('path');
 var fs = require('fs-extra');
 var iswin32 = process.platform === 'win32';
 var shelljs = require('shelljs');
+var os = require('os');
 
 const TIMEOUT = 60 * 1000;
 
 describe('first tests', function () {
+    console.log('---- start ----');
+    console.log(os.arch());
+    console.log(os.type());
+    console.log(os.platform());
+    console.log(os.userInfo());
     helpers.setDefaultTimeout(TIMEOUT);
     const testProject = helpers.tmpDir('first_test_project');
     beforeEach(function() {
@@ -119,6 +125,30 @@ describe('first tests', function () {
                 console.log('---- ls/dir errors ----');
                 console.log(data);
             });
+        });
+    });
+
+    it('Test 005-1 : stat by command', function () {
+        return new Promise(function (resolve,reject) {
+            if (iswin32) {
+              var dest = path.resolve(testProject, 'Test01');
+              var cp = child_process.spawn('cmd', ['/c', 'stat', dest]);
+              cp.on('exit', function (code) {
+                  expect(1).toBe(1);
+                  resolve();
+              });
+              cp.stdout.setEncoding('utf-8');
+              cp.stdout.on('data', function (data) {
+                  console.log('---- stat results ----');
+                  console.log(data);
+              });
+              cp.stderr.setEncoding('utf-8');
+              cp.stderr.on('data', function (data) {
+                  console.log('---- stat errors ----');
+                  console.log(data);
+              });
+
+            }
         });
     });
 
